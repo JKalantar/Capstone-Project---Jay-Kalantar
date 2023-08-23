@@ -39,15 +39,18 @@ These datasets provide the underlying data that form the basis of the feature en
 10) Scaled numerical fields
 
 
-## Summary of the Findings
-
+## Modeling 
 ### Regression Models
 * Random Forest followed by Gradient Boost provide the best scores but they also run much slower than other models
+* Hyperparameter tuning of the model can imporved the results significantly
 
 ### Classification Models
 * There is only around 3% overtime, so our data is imbalanced.  We are using Precision and Recall to score and optimize our models
 * Random Forest and Gradient Boost provide the best Precision but the Decision Tree provides the best Recall
+* Hyperparameter tuning of the model can imporved the results significantly
 
+
+## Summary of the Findings
 ### Both Regression and classification models show the following Feature importance:
 1. REG_Hours:  As more hours are associated with a Position the probability of %OT goes up.  These active positions approch 40 hrs/wk more quickly resulting in higher OT incidence.
 2. DayOfWeek:  This is expected. As employees approach the 40 hrs/wk later in the week, they are more prone to result in OT
