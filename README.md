@@ -40,14 +40,22 @@ A comparative analysis of different machine learning models for predicting overt
 
 ## Summary of the Findings
 
-Our analysis of different machine learning models shows that tuned Decision Tree or Logistic Regression models can perform well in predicting overtime occurrence. Both models showed high Precision and Recall scores, meaning they can correctly classify overtime occurrence cases and minimize false positives and negatives. I also identified the most influential features that affect overtime occurrence, based on the feature importance scores of the models. The features that have a positive correlation with overtime are: 
-High percentage of incomplete or open punches: This feature measures the percentage of punches that are not properly recorded or closed by the employees. A high value of this feature indicates a lack of compliance or awareness of the punching compliance, which may lead to overtime occurrence.
-Higher number of daily punches by the same employee: This feature measures the number of punches per day by each employee. A high value of this feature indicates a high frequency or intensity of work, which may increase the likelihood of overtime occurrence.
-High percentage of time changes: This feature measures the percentage of punches modified or corrected by the supervisors. A high value of this feature indicates a high variability or uncertainty in the working hours, which can result in overtime occurrence.
-High correction lag: This feature measures the average number of days between the date of a punch exception and the date of its correction. A high value of this feature indicates a delay or inefficiency in resolving the punch exceptions, which may cause overtime occurrence.
-Higher number of supervisors per employee:  I determined the number of supervisors based on who made the daily corrections for each employee.  A higher number may indicate lack of direct supervision that may lead to higher overtime occurrence.
+Our analysis of different machine learning models shows that tuned Decision Tree or Logistic Regression models can perform well in predicting overtime occurrence. Both models showed high Precision and Recall scores, meaning they can correctly classify overtime occurrence cases and minimize false positives and negatives. I also identified the most influential features that affect overtime occurrence, based on the feature importance scores of the models. The features that have a positive correlation with overtime are:
+
+**High percentage of incomplete or open punches**: This feature measures the percentage of punches that are not properly recorded or closed by the employees. A high value of this feature indicates a lack of compliance or awareness of the punching compliance, which may lead to overtime occurrence.
+
+**Higher number of daily punches by the same employee**: This feature measures the number of punches per day by each employee. A high value of this feature indicates a high frequency or intensity of work, which may increase the likelihood of overtime occurrence.
+
+**High percentage of time changes**: This feature measures the percentage of punches modified or corrected by the supervisors. A high value of this feature indicates a high variability or uncertainty in the working hours, which can result in overtime occurrence.
+
+**High correction lag**: This feature measures the average number of days between the date of a punch exception and the date of its correction. A high value of this feature indicates a delay or inefficiency in resolving the punch exceptions, which may cause overtime occurrence.
+
+**Higher number of supervisors per employee**: I determined the number of supervisors based on who made the daily corrections for each employee.  A higher number may indicate lack of direct supervision that may lead to higher overtime occurrence.
+
 The factors that have a negative correlation with overtime are:
-Number of employees: This feature measures the number of employees who perform the same task or belong to the same group. A low value of this feature indicates a low availability or redundancy of resources, which may increase the demand or pressure on the existing employees, leading to overtime occurrence.
+
+**Number of employees**: This feature measures the number of employees who perform the same task or belong to the same group. A low value of this feature indicates a low availability or redundancy of resources, which may increase the demand or pressure on the existing employees, leading to overtime occurrence.
+
 These findings can help managers and supervisors monitor and control these factors and reduce the risk of overtime occurrence.
 
 
