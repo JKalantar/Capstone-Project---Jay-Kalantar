@@ -1,9 +1,11 @@
-# Jay-Kalantar-Capstone Project: Initial Report and Exploratory Data Analysis (EDA)
+# Jay-Kalantar-Capstone Project: Final Report
 
 
 
 ## Objective:   
-### My objective is to leverage Machine Learning Models to improve payroll processes and reduce costs for our clients.  My initial focus is to identify the leading indicators for Overtime work and then attempt to predict Overtime occurrences. 
+Unanticipated overtime (OT) costs are a common problem for many service sector businesses, as they can erode their profit margins and affect their employees' well-being. To help them address this problem, I applied various machine learning methods to determine the main factors that can forecast the risk of overtime occurrence. This study can offer our clients valuable insights and suggestions on how to improve their workforce management and reduce overtime costs.
+
+
 
 
 ## Data Understanding:
@@ -12,8 +14,7 @@
 **Audits** – Archive of timecard adjustments (e.g., Original Time IN, Current Time IN, …)  
 **Timesheets** – Employee’s calculated pay (e.g., REG Pay, Overtime Pay, Expenses, … )  
 **Budgets / Schedules** – Planned Budget or attendance for the upcoming timecards.  
-**Employees** – Employee demographics such as the hire dates, base salary, and positions  
-**Managers** – Manager details such as title, number of employees, and locations they manage  
+
 
 These datasets provide the underlying data that form the basis of the feature engineering for analysis:  
 **OPEN punches** - List of punches with IN and/or OUT added by a manager  
@@ -23,45 +24,33 @@ These datasets provide the underlying data that form the basis of the feature en
 
 
 ### Output variable (desired target):  
-**%OT** – Employee’s calculated Percent Overtime [ $OT/($REG + $OT) ]
+**OT Hours** – Employee’s OT Occurance (0/1)
 
 
-## Data Preparation:
-1) Count Punches from from Timecards
-2) Create %OT KPI calculation from Timesheets
-3) Calculate Correction Counts and Lag Hours from Correction Lags
-4) Combine Punches and Correction lags
-5) Combine with Timesheet Data
-6) Select specific features
-7) Replaced unknown with NaN values with zero
-8) One-Hot encodes all object features
-9) Split Train / Test (30%)
-10) Scaled numerical fields
+## Data Preparation
+First, data cleanups were performed to remove irrelevant or inaccurate data, such as data added after the pay period, PTO data, and rows without time entries.  Next, feature engineering is done to create new variables and metrics from the existing data, such as the number of punches per day, total REG and OT hours per day, the budget by day-of-week, the correction counts and lag hours, and the combination of punches and correction lags. Finally, all the data sources are consolidated into a single dataframe for further analysis and modeling.
+
+Our analysis does not consider the particularities of each client, but rather the common factors that affect their performance. This way, I can draw findings that are applicable to all of them.
 
 
-## Modeling 
-### Regression Models
-* Random Forest followed by Gradient Boost provide the best scores but they also run much slower than other models
-* Hyperparameter tuning of the model can imporved the results significantly
 
-### Classification Models
-* There is only around 3% overtime, so our data is imbalanced.  We are using Precision and Recall to score and optimize our models
-* Random Forest and Gradient Boost provide the best Precision but the Decision Tree provides the best Recall
-* Hyperparameter tuning of the model can imporved the results significantly
+## Models
+A comparative analysis of different machine learning models for predicting overtime occurrence was performed. The dataset was highly unbalanced, with only 3% of the cases having overtime occurrence. Therefore, high Precision and Recall scores were needed to accurately identify overtime cases and reduce false positives and negatives. After tuning, Decision Tree and Logistic Regression models showed good performance on this task. The most important features for predicting overtime occurrence were also identified based on the feature importance scores of the models.
 
 
 ## Summary of the Findings
-### Both Regression and classification models show the following Feature importance:
-1. REG_Hours:  As more hours are associated with a Position the probability of %OT goes up.  These active positions approch 40 hrs/wk more quickly resulting in higher OT incidence.
-2. DayOfWeek:  This is expected. As employees approach the 40 hrs/wk later in the week, they are more prone to result in OT
-3. Miss_Punch Corr Lag: Employees whose Timecards are unapproved for a long time will prevent the manager from noticing their hours are approaching 40 hours.
-4. Open_Punch Corr Lag: Employees whose Timecards are incomplete for a long time will prevent managers from noticing their hours are approaching 40 hours.
-5. Specific Positions -  This seems to be due to colinearity the Feature
+
+Our analysis of different machine learning models shows that tuned Decision Tree or Logistic Regression models can perform well in predicting overtime occurrence. Both models showed high Precision and Recall scores, meaning they can correctly classify overtime occurrence cases and minimize false positives and negatives. I also identified the most influential features that affect overtime occurrence, based on the feature importance scores of the models. The features that have a positive correlation with overtime are: 
+High percentage of incomplete or open punches: This feature measures the percentage of punches that are not properly recorded or closed by the employees. A high value of this feature indicates a lack of compliance or awareness of the punching compliance, which may lead to overtime occurrence.
+Higher number of daily punches by the same employee: This feature measures the number of punches per day by each employee. A high value of this feature indicates a high frequency or intensity of work, which may increase the likelihood of overtime occurrence.
+High percentage of time changes: This feature measures the percentage of punches modified or corrected by the supervisors. A high value of this feature indicates a high variability or uncertainty in the working hours, which can result in overtime occurrence.
+High correction lag: This feature measures the average number of days between the date of a punch exception and the date of its correction. A high value of this feature indicates a delay or inefficiency in resolving the punch exceptions, which may cause overtime occurrence.
+Higher number of supervisors per employee:  I determined the number of supervisors based on who made the daily corrections for each employee.  A higher number may indicate lack of direct supervision that may lead to higher overtime occurrence.
+The factors that have a negative correlation with overtime are:
+Number of employees: This feature measures the number of employees who perform the same task or belong to the same group. A low value of this feature indicates a low availability or redundancy of resources, which may increase the demand or pressure on the existing employees, leading to overtime occurrence.
+These findings can help managers and supervisors monitor and control these factors and reduce the risk of overtime occurrence.
 
 
-## Next steps and Model Improvements:
-1. Feature engineering.  Add more features such as hire date, pay rate, state, employment statistics, and employee demographic (age, gender, ...) to see if they have any impact on Overtime.
-2. Add more data from different clients to confirm the finding
-3. Remove features with strong colinearity
-4. Try other modeling techniques such as Ensemble models that combine multiple algorithms to improve performance.
-5. Tune the hyperparameters of the best-performing classifier
+
+## Next steps and Model Impovements:
+We need a data-driven approach to help our clients minimize the expenses associated with paying overtime to their employees. We can use time-series analysis methods such as ARMA or LSTM to model the patterns and trends of overtime over time and predict future overtime levels. This can provide our clients with actionable insights and recommendations on how to optimize their workforce management and reduce overtime costs.
